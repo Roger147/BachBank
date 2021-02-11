@@ -14,7 +14,6 @@ public class LoginDAOImp implements LoginDAO {
 
 	@Override
 	public Account getAccount(String username, String password) {
-		Login login = null;
 		
 		try (Connection connection = ConnectionUtility.getConnection()) {
 			
@@ -25,18 +24,19 @@ public class LoginDAOImp implements LoginDAO {
 			
 			ResultSet rs = pstmt.executeQuery();
 			
-			if (rs.next()) {
-				int accountId = rs.getInt("accountid");
-				String user = rs.getString("username");
-				String pass = rs.getString("password");
 				
-				login = new Login(user, pass, accountId);
+			int accountId = rs.getInt("accountid");
+			String user = rs.getString("username");
+			String pass = rs.getString("password");
+				
+			Login login = new Login(user, pass, accountId);
+			int id = login.getId();
 			}
-			} catch (DatabaseConnectionException | SQLException e) {
+			 catch (DatabaseConnectionException | SQLException e) {
 			System.out.println(e.getMessage());
 		}
 			AccountDAO accdao = new AccountDAOImp();
-			Account acc = accdao.getAccountByID(login.getId());
+			Account acc = accdao.getAccountByID();
 			return acc;
 		
 			}

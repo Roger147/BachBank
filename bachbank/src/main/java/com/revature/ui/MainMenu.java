@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class MainMenu implements Menu {
 
+
 	@Override
 	public void display() {
 		int choice = 0;
@@ -27,15 +28,14 @@ public class MainMenu implements Menu {
 					Menu login = new LoginMenu();
 					login.display();
 					break;
-				case 3:
+				/*case 3:
 					Menu create = new CreateMenu();
 					create.display();
-					break;
+					break;*/
 				default:
 					System.out.println("No valid choice entered, please try again");
 			}
 			
 		} while (choice != 1);
-		
-	}	
-
+	}
+}

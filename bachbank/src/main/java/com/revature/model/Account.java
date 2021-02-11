@@ -38,7 +38,7 @@ public class Account {
 	}
 	
 	private void firstdeposit(long money) throws InvalidTransferException {
-		if (money > 99) this.balance = balance + money;
+		if (money >= 100) this.balance = balance + money;
 		else { throw new InvalidTransferException("Invalid Initial Deposit Amount");
 		}
 		

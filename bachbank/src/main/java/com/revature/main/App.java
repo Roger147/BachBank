@@ -12,7 +12,7 @@ import com.revature.dao.AccountDAOImp;
 
 public class App {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InvalidTransferException {
 		Menu mainMenu = new MainMenu();
 		mainMenu.display();
 		

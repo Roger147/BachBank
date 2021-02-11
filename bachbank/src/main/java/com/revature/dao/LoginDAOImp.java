@@ -14,29 +14,30 @@ public class LoginDAOImp implements LoginDAO {
 
 	@Override
 	public Account getAccount(String username, String password) {
+		int id = 0;
 		
 		try (Connection connection = ConnectionUtility.getConnection()) {
 			
-			String sql = "SELECT * FROM bachbank.login WHERE username = ?, password = ?";
+			String sql = "SELECT * FROM bachbank.login WHERE username = ? AND password = ?";
 			PreparedStatement pstmt = connection.prepareStatement(sql);
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
-				
+			if (rs.next()) {	
 			int accountId = rs.getInt("accountid");
 			String user = rs.getString("username");
 			String pass = rs.getString("password");
 				
 			Login login = new Login(user, pass, accountId);
-			int id = login.getId();
-			}
+			id = login.getId();
+			}}
 			 catch (DatabaseConnectionException | SQLException e) {
 			System.out.println(e.getMessage());
 		}
 			AccountDAO accdao = new AccountDAOImp();
-			Account acc = accdao.getAccountByID();
+			Account acc = accdao.getAccountByID(id);
 			return acc;
 		
 			}
